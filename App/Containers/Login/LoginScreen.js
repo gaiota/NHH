@@ -6,6 +6,8 @@ import Utils from '../../Utils/Utils';
 import StringUtils from '../../Utils/StringUtils';
 import { connect } from 'react-redux';
 import UserActions from '../../Redux/UserRedux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 class LoginScreen extends Component {
     constructor() {
@@ -22,42 +24,48 @@ class LoginScreen extends Component {
         var { email, password } = this.state
 
         return (
-            <View style={styles.container}>
+            <KeyboardAwareScrollView>
+                <View style={styles.container}>
 
-                <Image source={Images.icon_galota} style={styles.logo} />
-                <View >
-                    <TextInput
-                        placeholder={"Email"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                email: text
-                            })
-                        }}
-                        value={email}
-                    />
-                    <TextInput
-                        placeholder={"Password"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                password: text
-                            })
-                        }}
-                        value={password}
-                    />
-                </View >
-                <View style={styles.containerAction}>
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                        this.props.navigation.navigate("RegisterScreen")
-                    }}>
-                        <Text style={styles.textButton}>Sign up</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => this.onLogin()}>
-                        <Text style={styles.textButton}>Login</Text>
-                    </TouchableOpacity>
+                    <Image source={Images.icon_galota} style={styles.logo} />
+                    <View >
+                        <TextInput
+                            placeholder={"Email"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    email: text
+                                })
+                            }}
+                            value={email}
+                            onSubmitEditing={(event)=>this.refs.password.focus()}
+                        />
+                        <TextInput
+                            ref = "password"
+                            placeholder={"Password"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    password: text
+                                })
+                            }}
+                            secureTextEntry={true}
+                            value={password}
+                            onSubmitEditing={(event)=>this.onLogin()}
+                        />
+                    </View >
+                    <View style={styles.containerAction}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                            this.props.navigation.navigate("RegisterScreen")
+                        }}>
+                            <Text style={styles.textButton}>Sign up</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.onLogin()}>
+                            <Text style={styles.textButton}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </KeyboardAwareScrollView>
         )
     }
 
@@ -85,7 +93,7 @@ class LoginScreen extends Component {
         if (!Utils.isUndefined(newProps.user) && this.state.isLogin && newProps.loginted && !newProps.errorLogin) {
             Utils.showMessage("Login success");
             this.props.navigation.navigate("PrimaryNav")
-        } else{
+        } else {
             if (!Utils.isUndefined(newProps.user) && this.state.isLogin && !newProps.loginted && newProps.errorLogin) {
                 Utils.showMessage("Login failure");
             }
@@ -102,7 +110,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    params: (params) => dispatch(UserActions.params(params))
+    login: (params) => dispatch(UserActions.login(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

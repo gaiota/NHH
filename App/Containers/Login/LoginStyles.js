@@ -8,7 +8,8 @@ export default styles = StyleSheet.create({
     container:{
         flex:1,
         alignItems:"center",
-        justifyContent:"center"
+        justifyContent:"center",
+        marginTop:height*5
     },
 
     logo:{

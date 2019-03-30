@@ -26,7 +26,7 @@ class RegisterScreen extends Component {
         var { fullname, email, password, passwordConfirm } = this.state
         return (
             <KeyboardAwareScrollView >
-                <View style={styles.container}>
+                <View style={[styles.container]}>
 
                     <Image source={Images.icon_galota} style={styles.logo} />
                     <View style={styles.inputContainer}>
@@ -39,8 +39,11 @@ class RegisterScreen extends Component {
                                 })
                             }}
                             value={fullname}
+                            onSubmitEditing={(event) => this.refs.email.focus()}
+
                         />
                         <TextInput
+                            ref="email"
                             placeholder={"Email"}
                             style={styles.input}
                             onChangeText={(text) => {
@@ -49,8 +52,10 @@ class RegisterScreen extends Component {
                                 })
                             }}
                             value={email}
+                            onSubmitEditing={(event) => this.refs.password.focus()}
                         />
                         <TextInput
+                            ref="password"
                             placeholder={"Password"}
                             style={styles.input}
                             onChangeText={(text) => {
@@ -58,9 +63,13 @@ class RegisterScreen extends Component {
                                     password: text
                                 })
                             }}
+                            secureTextEntry={true}
                             value={password}
+                            onSubmitEditing={(event) => this.refs.passwordConfirm.focus()}
+
                         />
                         <TextInput
+                            ref="passwordConfirm"
                             placeholder={"Confirm password"}
                             style={styles.input}
                             onChangeText={(text) => {
@@ -68,11 +77,13 @@ class RegisterScreen extends Component {
                                     passwordConfirm: text
                                 })
                             }}
+                            secureTextEntry={true}
                             value={passwordConfirm}
+                            onSubmitEditing={(event) => this.onRegister()}
                         />
                     </View>
-                    <View style={styles.containerAction} onPress={() => this.props.onRegiter()}>
-                        <TouchableOpacity style={styles.buttonContainer}>
+                    <View style={styles.containerAction} >
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.onRegister()}>
                             <Text style={styles.textButton}>Sign up</Text>
                         </TouchableOpacity>
                     </View>
@@ -82,7 +93,7 @@ class RegisterScreen extends Component {
         )
     }
 
-    onRegiter = () => {
+    onRegister = () => {
         const { fullname, email, password, passwordConfirm } = this.state;
         if (Utils.isUndefined(fullname) || Utils.isUndefined(email) || Utils.isUndefined(password) || Utils.isUndefined(passwordConfirm)) {
             Utils.showMessage("Please enter full information")
