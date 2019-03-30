@@ -20,11 +20,11 @@ const PrimaryNav = createBottomTabNavigator({
   },
   CircleScreen: {
     screen: CircleScreen,
-    navigationOptions: navigationOption("home", "Home")
+    navigationOptions: navigationOption("sync", "My Circle")
   },
   ReportScreen: {
     screen: ReportScreen,
-    navigationOptions: navigationOption("home", "Home")
+    navigationOptions: navigationOption("chart-line-variant", "Report")
   },
   SettingScreen: {
     screen: SettingScreen,
