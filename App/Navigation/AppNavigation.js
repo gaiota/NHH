@@ -1,4 +1,4 @@
-import { createAppContainer ,createBottomTabNavigator} from 'react-navigation'
+import { createAppContainer ,createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 
 import styles from './Styles/NavigationStyles'
 import HealthScreen from '../Containers/Health/HealthScreen'
@@ -6,6 +6,8 @@ import PeopleScreen from '../Containers/People/PeopleScreen'
 import SyncScreen from '../Containers/Syn/SyncScreen'
 import WarningScreen from '../Containers/Warning/WarningScreen'
 import UserScreen from '../Containers/User/UserScreen'
+import LoginScreen from '../Containers/Login/LoginScreen'
+import RegisterScreen from '../Containers/Register/RegisterScreen'
 
 // Manifest of possible screens
 const PrimaryNav = createBottomTabNavigator({
@@ -23,6 +25,21 @@ const PrimaryNav = createBottomTabNavigator({
   }
 })
 
+const stackNavigation = createStackNavigator(
+  {
+    RegisterScreen: { screen: RegisterScreen },
+    LoginScreen: { screen: LoginScreen },
+    PrimaryNav: { screen: PrimaryNav },
+  }, {
+    // Default config for all screens
+    headerMode: 'none',
+    initialRouteName: 'RegisterScreen',
+    navigationOptions: {
+      headerStyle: styles.header
+    }
+  }
+)
 
 
-export default createAppContainer(PrimaryNav)
+
+export default createAppContainer(stackNavigation)
