@@ -1,29 +1,43 @@
-import { createAppContainer ,createBottomTabNavigator, createStackNavigator} from 'react-navigation'
+import React from 'react'
+
+import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 
 import styles from './Styles/NavigationStyles'
-import HealthScreen from '../Containers/Health/HealthScreen'
-import PeopleScreen from '../Containers/People/PeopleScreen'
-import SyncScreen from '../Containers/Syn/SyncScreen'
-import WarningScreen from '../Containers/Warning/WarningScreen'
-import UserScreen from '../Containers/User/UserScreen'
+import HomeScreen from '../Containers/Home/HomeScreen'
+import CircleScreen from '../Containers/Circle/CircleScreen'
+import ReportScreen from '../Containers/Report/ReportScreen'
+import SettingScreen from '../Containers/Setting/SettingScreen'
 import LoginScreen from '../Containers/Login/LoginScreen'
 import RegisterScreen from '../Containers/Register/RegisterScreen'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 // Manifest of possible screens
 const PrimaryNav = createBottomTabNavigator({
-  HealthScreen: { screen: HealthScreen },
-  PeopleScreen: { screen: PeopleScreen },
-  SyncScreen: { screen: SyncScreen },
-  UserScreen: { screen: UserScreen },
-  WarningScreen: { screen: WarningScreen }
-}, {
-  // Default config for all screens
-  headerMode: 'none',
-  initialRouteName: 'HealthScreen',
-  navigationOptions: {
-    headerStyle: styles.header
+  HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: navigationOption("home", "Home")
+  },
+  CircleScreen: {
+    screen: CircleScreen,
+    navigationOptions: navigationOption("home", "Home")
+  },
+  ReportScreen: {
+    screen: ReportScreen,
+    navigationOptions: navigationOption("home", "Home")
+  },
+  SettingScreen: {
+    screen: SettingScreen,
+    navigationOptions: navigationOption("settings", "Settings")//TODO: i18n
   }
-})
+}, {
+    // Default config for all screens
+    headerMode: 'none',
+    initialRouteName: 'HomeScreen',
+    navigationOptions: {
+      headerStyle: styles.header
+    }
+  })
 
 const stackNavigation = createStackNavigator(
   {
@@ -33,12 +47,28 @@ const stackNavigation = createStackNavigator(
   }, {
     // Default config for all screens
     headerMode: 'none',
-    initialRouteName: 'LoginScreen',
+    initialRouteName: 'PrimaryNav',
     navigationOptions: {
       headerStyle: styles.header
     }
   }
 )
+
+function navigationOption(name, title) {
+  let option = {
+    title: title,
+    header: null,
+    tabBarIcon: ({ tintColor }) => {
+      return (<Icon
+        name={name}
+        size={28}
+        color={tintColor}
+        style={{ marginTop: 5, paddingBottom: 10 }}
+      />)
+    }
+  }
+  return option;
+}
 
 
 

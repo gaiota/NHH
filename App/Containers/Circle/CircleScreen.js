@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import {Text, View } from 'react-native'
 
 // Styles
-export default class HealthScreen extends Component {
+export default class CircleScreen extends Component {
   render () {
     return (
       <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
-          <Text>HealthScreen</Text>
+          <Text>CircleScreen</Text>
       </View>
     )
   }
