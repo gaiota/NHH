@@ -33,5 +33,13 @@ export default styles = StyleSheet.create({
         borderWidth:width*0.3,
         margin:width *3,
         marginTop:width *18
-    }
+    },
+
+    input:{
+        minWidth:width *70  ,
+        paddingTop:width *5,
+        paddingBottom:width *5,
+        borderColor:Colors.red1,
+        borderBottomWidth:width * 0.3
+      },
 })

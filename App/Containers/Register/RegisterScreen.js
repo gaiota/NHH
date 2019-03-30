@@ -90,6 +90,8 @@ class RegisterScreen extends Component {
             Utils.showMessage("Password length must be longer than 6 characters")
         } else if (!StringUtils.validatePassword(passwordConfirm)) {
             Utils.showMessage("Password length must be longer than 6 characters")
+        } else if (!StringUtils.validateEmail(email)) {
+            Utils.showMessage("Email is not in the correct format")
         } else if (password !== password) {
             Utils.showMessage("Password is not same")
         } else {

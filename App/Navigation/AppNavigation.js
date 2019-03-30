@@ -33,7 +33,7 @@ const stackNavigation = createStackNavigator(
   }, {
     // Default config for all screens
     headerMode: 'none',
-    initialRouteName: 'RegisterScreen',
+    initialRouteName: 'LoginScreen',
     navigationOptions: {
       headerStyle: styles.header
     }
