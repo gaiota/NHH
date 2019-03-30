@@ -3,6 +3,18 @@ import {Text, View } from 'react-native'
 
 // Styles
 export default class ConnectScreen extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+        fullname: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        isRegiter: ""
+    }
+   }
+
   render () {
     return (
       <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
@@ -60,6 +72,18 @@ export function ExtractTreatmentData(jsonData,treatmentType){
 // Upload to personal health measurement to Kanta
 // Patient ID already available in :  352186dd-8f66-4e7d-a7fd-9e257d4b7080
 
-export function GetAllPatientObservations(patientID){
-    
+export function UpdateObservationsKanta(patientID, arrayOfMeasurement){
+
+
+}
+
+
+export function GetAllPatientObservationsKanta(patientID){
+  fetch ("http://fhirsandbox.kanta.fi/phr-resourceserver/baseStu3/Observation?patient="+patientID+"&_pretty=true")
+  .then((response) => response.json())
+  .then((responseJson) => {
+
+      return responseJson;
+      //return responseJson;
+  })
 }

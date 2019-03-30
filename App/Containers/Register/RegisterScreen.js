@@ -82,7 +82,7 @@ class RegisterScreen extends Component {
         )
     }
 
-    onRegiter = () => {
+    onRegister = () => {
         const { fullname, email, password, passwordConfirm } = this.state;
         if (Utils.isUndefined(fullname) || Utils.isUndefined(email) || Utils.isUndefined(password) || Utils.isUndefined(passwordConfirm)) {
             Utils.showMessage("Please enter full information")
