@@ -5,7 +5,9 @@ import { Images } from '../../Themes';
 import Utils from '../../Utils/Utils';
 import StringUtils from '../../Utils/StringUtils';
 import { connect } from 'react-redux';
-import UserActions from '../../Redux/UserRedux'
+import UserActions from '../../Redux/UserRedux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 class RegisterScreen extends Component {
 
@@ -16,64 +18,67 @@ class RegisterScreen extends Component {
             email: "",
             password: "",
             passwordConfirm: "",
-            isRegiter:""
+            isRegiter: ""
         }
     }
 
     render() {
-        var { fullname, email, password ,passwordConfirm} = this.state
+        var { fullname, email, password, passwordConfirm } = this.state
         return (
-            <View style={styles.container}>
+            <KeyboardAwareScrollView >
+                <View style={styles.container}>
 
-                <Image source={Images.icon_galota} style={styles.logo} />
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        placeholder={"Fullname"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                fullname: text
-                            })
-                        }}
-                        value={fullname}
-                    />
-                    <TextInput
-                        placeholder={"Email"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                email: text
-                            })
-                        }}
-                        value={email}
-                    />
-                    <TextInput
-                        placeholder={"Password"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                password: text
-                            })
-                        }}
-                        value={password}
-                    />
-                    <TextInput
-                        placeholder={"Confirm password"}
-                        style={styles.input}
-                        onChangeText={(text) => {
-                            this.setState({
-                                passwordConfirm: text
-                            })
-                        }}
-                        value={passwordConfirm}
-                    />
+                    <Image source={Images.icon_galota} style={styles.logo} />
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            placeholder={"Fullname"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    fullname: text
+                                })
+                            }}
+                            value={fullname}
+                        />
+                        <TextInput
+                            placeholder={"Email"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    email: text
+                                })
+                            }}
+                            value={email}
+                        />
+                        <TextInput
+                            placeholder={"Password"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    password: text
+                                })
+                            }}
+                            value={password}
+                        />
+                        <TextInput
+                            placeholder={"Confirm password"}
+                            style={styles.input}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    passwordConfirm: text
+                                })
+                            }}
+                            value={passwordConfirm}
+                        />
+                    </View>
+                    <View style={styles.containerAction} onPress={() => this.props.onRegiter()}>
+                        <TouchableOpacity style={styles.buttonContainer}>
+                            <Text style={styles.textButton}>Sign up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={styles.containerAction} onPress={() => this.props.onRegiter()}>
-                    <TouchableOpacity style={styles.buttonContainer}>
-                        <Text style={styles.textButton}>Sign up</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </KeyboardAwareScrollView>
+
         )
     }
 
@@ -101,8 +106,8 @@ class RegisterScreen extends Component {
         }
     }
 
-    componentWillReceiveProps(newProps){
-        if(!Utils.isUndefined(newProps.user)&&this.state.isRegiter){
+    componentWillReceiveProps(newProps) {
+        if (!Utils.isUndefined(newProps.user) && this.state.isRegiter) {
             Utils.showMessage("Register success");
             this.props.navigation.navigate("LoginScreen")
         }
@@ -116,8 +121,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps =(dispatch)=>({
-    register:(params)=>dispatch(UserActions.register(params))
+const mapDispatchToProps = (dispatch) => ({
+    register: (params) => dispatch(UserActions.register(params))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(RegisterScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen)
