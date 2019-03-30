@@ -7,8 +7,10 @@ import ReduxPersist from '../Config/ReduxPersist'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
+import LoginScreen from './Login/LoginScreen';
 
 class RootContainer extends Component {
+  
   componentDidMount () {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
@@ -19,8 +21,9 @@ class RootContainer extends Component {
   render () {
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle='light-content' />
-        <ReduxNavigation />
+        <StatusBar barStyle='light-content' backgroundColor="transparent" />
+        {/* <ReduxNavigation /> */}
+        <LoginScreen/>
       </View>
     )
   }

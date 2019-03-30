@@ -14,7 +14,9 @@ const create = (baseURL = 'https://api.github.com/') => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     // 10 second timeout...
     timeout: 10000

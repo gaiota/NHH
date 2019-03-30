@@ -28,7 +28,11 @@ const metrics = {
     medium: 40,
     large: 60,
     logo: 200
-  }
+  },
+  sizeWidth: width / 100,
+  sizeHeight: (height - (Platform.OS === 'ios' ? 36 : 0)) / 100,
+  width: width,
+  height: height,
 }
 
 export default metrics
